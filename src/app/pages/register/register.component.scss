@@ -1,0 +1,150 @@
+.register-container {
+    width: 60vw !important;
+    margin-top: 10vh;
+}
+
+.register-container > h3 {
+    font-size: 1.2rem;
+}
+
+.register-container label,
+.register-container input {
+    font-size: 0.8rem;
+}
+
+.register-button-container {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.register-button-container button{
+    margin-bottom: 0.3rem !important;
+    font-size: 0.8rem;
+}
+
+.register-button-container > p {
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+.register-button-container > p > a {
+    font-size: inherit;
+}
+
+
+.checkmark-wrapper {  //circle
+    --check-size: 200px;
+    --check-border-width: 5px;
+    --checkmark-width: calc(var(--check-size)/2);
+    --checkmark-height: calc(var(--checkmark-width)/2);
+    --checkmark-left: calc(var(--checkmark-width)/2);
+    --checkmark-top: 50%;
+    --checkmark-color: #19b8a2;
+    position: relative;
+    width: var(--check-size);
+    height: var(--check-size);
+    margin-left: auto;   // center in the page
+    margin-right: auto; // center in the page
+}
+
+.checkmark-wrapper::after {  //define the circle sign
+    content: ""; // if you dont set the content value you wont see the pseudo element
+    position: absolute;
+    inset: 0;  // inset CSS property is a shorthand that corresponds to the top, right, bottom, and/or left
+    border: var(--check-border-width) solid #f8f8f8;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: block;
+    z-index: 0;  // so the pseudo after element sits below pseudo before
+}
+
+.checkmark-wrapper::before { // define the circle sign
+    content: "";
+    position: absolute;
+    inset: 0;  // the element should fill its parent
+    border: var(--check-border-width) solid transparent;
+    border-left-color: var(--checkmark-color);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: block;
+    z-index: 1;
+    animation: circle linear forwards 0.75s;  // forwards - https://www.w3schools.com/cssref/css3_pr_animation-fill-mode.php
+}
+
+@keyframes circle {
+    0% {
+        border-color: transparent;
+        border-left-color: var(--checkmark-color);
+    }
+    90%{
+        // keep only left border green and rotate it clock wise till 90%
+        transform: rotate(-360deg);
+        border-color: transparent;
+        border-left-color: var(--checkmark-color);
+    }
+    100% {  // all borders green at 100%
+        transform: rotate(-360deg);
+        border-color: var(--checkmark-color);
+    }
+}
+
+.checkmark { // define the check sign
+    width: var(--checkmark-width);
+    height: var(--checkmark-height);
+    position: absolute;
+    left: var(--checkmark-left);
+    top: var(--checkmark-top);
+    display: block;
+    border-left: var(--check-border-width) solid var(--checkmark-color);
+    border-bottom: var(--check-border-width) solid var(--checkmark-color);
+    transform-origin: left top;  //The transform origin is the point around which a transformation is applied.
+    transform: rotate(-45deg);
+    opacity: 0;  // initially keep the check sign hidden
+    animation: checkmark linear both 1s;
+}
+
+@keyframes checkmark {
+    0% {  // check sign hidden
+        height: 0;
+        width: 0;
+        opacity: 0;
+    }
+    80% {  // check sign hidden
+        height: 0;
+        width: 0;
+        opacity: 0;
+    }
+    90% {
+        height: var(--checkmark-height);
+        width: 0;
+        opacity: 1;
+    }
+    100% {
+        height: var(--checkmark-height);
+        width: var(--checkmark-width);
+        opacity: 1;
+    }
+}
+
+
+
+
+@media only screen and (min-width: 769px) {
+
+    .register-container {
+        width: 30vw !important;
+    }
+
+    .register-container label,
+    .register-container input {
+        font-size: 0.9rem;
+    }
+
+    .register-button-container button,
+    .register-button-container > p {
+        font-size: 0.9rem;
+    }
+
+}

@@ -1,0 +1,21 @@
+.nav-link {
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.nav-item {
+    margin: 0 1rem;
+}
+
+.search-form button[type="submit"]{
+    border-radius: 0.375rem;
+    border: 1px solid #dee2e6;
+    border-left: none ;
+}
+
+
+.search-form button[type="submit"] > i {
+    color: #ccc
+}

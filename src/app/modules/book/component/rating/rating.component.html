@@ -1,0 +1,11 @@
+<!-- <p>{{ rating }}</p> -->
+ <!-- use ng-container when you want to use ng directives without creating a DOM element -->
+<ng-container *ngFor="let item of [].constructor(fullStarsCount); let i = index">
+    <i class="fa-solid fa-star text-warning" [ngStyle]="{ fontSize: '0.8rem' }"></i>
+</ng-container>
+<ng-container *ngIf="halfStar">
+    <i class="fa-regular fa-star-half-stroke text-warning" [ngStyle]="{ fontSize: '0.8rem' }"></i>
+</ng-container>
+<ng-container *ngFor="let item of [].constructor(emptyStarsCount); let i = index">
+    <i class="fa-regular fa-star" [ngStyle]="{ fontSize: '0.8rem' }"></i>
+</ng-container>

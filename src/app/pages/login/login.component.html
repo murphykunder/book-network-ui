@@ -1,0 +1,32 @@
+<div class="container-fluid card login-container">
+    <h3 class="text-center mt-2 text-uppercase">Login</h3>
+    <hr class="p-0 m-0">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div *ngFor="let msg of errorMsg" class="my-3 text-center">
+            <p class="text-danger">{{msg}}</p>
+        </div>
+        <div class="my-3">
+            <label for="emailAddress" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="emailAddress" formControlName="email" autocomplete="email" placeholder="name@example.com">
+            <span class="text-danger" *ngIf="(loginFormControls['email']?.touched || submitted) && loginFormControls['email'].errors?.['required']">
+                Email address is required
+            </span>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" formControlName="password" autocomplete="current-password" placeholder="Password">
+            <span class="text-danger" *ngIf="(loginFormControls['password'].touched || submitted) && loginFormControls['password'].errors?.['required']">
+                Password is required
+            </span>
+        </div>
+        <div class="login-button-container mb-3">
+            <button type="submit" class="btn btn-primary">
+                <em class="fas fa-sign-in-alt">&nbsp;Sign in</em>
+            </button>
+            <div>
+                Don't have an account?
+                <button type="button" class="btn btn-link" (click)="register()">Register</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,25 @@
+<div class="book-list-container m-5">
+    <h2>Books</h2>
+    <hr>
+    <!-- display book list -->
+    <div class="book-list-card-group">
+        <app-book *ngFor="let book of bookResponse.content"
+            [book]="book"
+            (borrow)="onBorrow($event)"
+            [actionResult]= "actionResult"
+        ></app-book>
+        <!-- <p
+            [class.text-danger]="resultCode == 'KO'"
+            [class.text-success]="resultCode == 'OK'"
+        > -->
+        <!-- </p> -->
+    </div>
+    <!-- display pagination -->
+     <app-pagination
+        [page]="defaultPage"
+        [totalPages]="bookResponse.totalPages || 0"
+        [isFirst]="bookResponse.first || false"
+        [isLast]="bookResponse.last || false"
+        (handleClick)="findAllBooks($event)"
+    ></app-pagination>
+</div>

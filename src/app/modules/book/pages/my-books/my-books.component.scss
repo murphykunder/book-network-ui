@@ -1,0 +1,57 @@
+.book-card-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center ;
+}
+
+.error-alert{
+    width: 25rem;
+    border: 1px solid #e6717c;
+    align-items: center;
+    padding: 5px 0;
+    display: grid;
+    grid-template-columns: 1fr 6fr 1fr;
+    gap: 10px;
+    position: fixed;
+    top: 50px;
+    right: 0;
+    background-color: #fff;
+    animation: error-alert-fade;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-direction: ease-in;
+    opacity: 1;
+    animation-delay: 10s;
+}
+
+@keyframes error-alert-fade {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.error-alert .error-alert-icon {
+    text-align: center;
+    color: #dc3545;
+}
+
+.error-alert .error-alert-message {
+    text-align: left;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.error-alert .error-alert-close {
+    text-align: center;
+}
+
+.error-alert .button-close{
+    border: none;
+    background: none;
+    color: #6e1a22;
+}

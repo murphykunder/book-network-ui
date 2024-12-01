@@ -1,0 +1,24 @@
+<div class="activate-account-container" >
+    <div *ngIf="!isAccountActivated; else accountActiveSuccess">
+        <h2 class="mb-4">Enter token to activate your account</h2>
+        <code-input #codeInput [code]="'number'"
+                    [codeLength]="6"
+                    [isCharsCode]="false"
+                    [isCodeHidden]="false"
+                    (codeCompleted)="onCodeCompletion($event)"
+                    (codeChanged)="onCodeChange()"
+        ></code-input>
+        <div class="activate-account-fail mt-3" *ngIf="isSubmitted">
+            <p class="text-danger">{{ errorMessage }}</p>
+        </div>
+    </div>
+    <ng-template #accountActiveSuccess>
+        <div class="account-active-success">
+            <h2>Account Activated!</h2>
+            <p>You have successfully activated your account. Please login to continue.</p>
+            <button type="button" class="btn btn-primary" (click)="login()">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>&nbsp;Go to Login
+            </button>
+        </div>
+    </ng-template>
+</div>

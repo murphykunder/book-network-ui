@@ -1,0 +1,15 @@
+<div class="modal" #successModal tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header m-auto border-0">
+            <app-checkmark></app-checkmark>
+        </div>
+        <div class="modal-body text-center">
+          <p>{{message}}</p>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="w-100 btn btn-primary" (click)="closeModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

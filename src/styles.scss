@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+
+*, button, p {
+    font-size: 0.8rem;
+}
+
+.form-error-message {
+    font-size: 0.8rem;
+    color: red;
+    margin: 0;
+}
+
+.logout-button {
+    border: none;
+    background: none;
+}
+@media only screen and (min-width: 769px) {
+
+    *, button, p {
+        font-size: 1rem;
+    }
+
+    .form-error-message {
+        font-size: 1rem;
+    }
+}

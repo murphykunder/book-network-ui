@@ -1,0 +1,66 @@
+<div class="p-2">
+    <h2>Manage my book</h2>
+    <hr>
+    <!-- display errors -->
+    <div class="alert alert-danger mt-2" role="alert" *ngIf="errorMsg.length > 0">
+        {{ errorMsg }}
+    </div>
+    <div class="d-flex">
+        <div class="col-3">
+            <img class="rounded-1 w-100 h-100" [src]="picture" alt="Book cover image">
+            <div class="mt-2">
+                <input
+                    (change)="onFileSelected($event)"
+                    class="form-control form-control-sm form-control form-control-sm-sm"
+                    id="formFile"
+                    type="file"
+                    accept="image/*"
+                >
+            </div>
+        </div>
+        <div class="col-9">
+            <form [formGroup]="manageBookForm" class="manage-form row g-3 p-3">
+                <div class="col-12">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" formControlName="title" id="title" class="form-control form-control-sm" placeholder="Book title">
+                    <span class="text-danger" *ngIf="(manageBookFormControls['title']?.touched || submitted) && manageBookFormControls['title'].errors?.['required']">
+                            Title is required
+                    </span>
+                </div>
+                <div class="col-6">
+                    <label for="authorName" class="form-label">Author name</label>
+                    <input type="text" formControlName="authorName" id="authorName" class="form-control form-control-sm" placeholder="Author name">
+                    <span class="text-danger" *ngIf="(manageBookFormControls['authorName']?.touched || submitted) && manageBookFormControls['authorName'].errors?.['required']">
+                            Author name is required
+                    </span>
+                </div>
+                <div class="col-6">
+                    <label for="isbn" class="form-label">ISBN</label>
+                    <input type="text" formControlName="isbn" id="isbn" class="form-control form-control-sm" placeholder="ISBN">
+                    <span class="text-danger" *ngIf="(manageBookFormControls['isbn']?.touched || submitted) && manageBookFormControls['isbn'].errors?.['required']">
+                            ISBN is required
+                    </span>
+                </div>
+                <div class="col-12">
+                    <label for="synopsis" class="form-label">Synopsis</label>
+                    <textarea class="form-control form-control-sm" rows="4" placeholder="Book Synopsis" formControlName="synopsis" id="synopsis"></textarea>
+                    <span class="text-danger" *ngIf="(manageBookFormControls['synopsis']?.touched || submitted) && manageBookFormControls['synopsis'].errors?.['required']">
+                            Synopsis is required
+                    </span>
+                </div>
+                <div class="col-12">
+                    <input type="checkbox" class="form-check-input" formControlName="shareable" id="shareme">
+                    <label for="shareme" class="form-check-label">&nbsp;Share me</label>
+                </div>
+                <div class="d-flex justify-content-end gap-3">
+                    <button class="btn btn-outline-primary" (click)="saveBook()">
+                        <i class="fa-solid fa-floppy-disk"></i>&nbsp;Save
+                    </button>
+                    <button class="btn btn-outline-danger" (click)="onCancel()">
+                        <i class="fa-solid fa-xmark"></i>&nbsp;Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

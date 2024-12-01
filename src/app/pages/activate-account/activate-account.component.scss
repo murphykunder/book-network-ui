@@ -1,0 +1,37 @@
+code-input {
+    --item-height: 3rem;
+}
+
+.activate-account-container {
+    text-align: center;
+    width: 60vw;
+    margin-left: auto;
+    margin-right: auto;
+    top: 30vh;
+    display: block;
+    position: relative;
+}
+
+.account-active-success > h2 {
+    color: #198754;
+    font-size: 2rem;
+}
+
+.account-active-success p {
+    font-size: 1rem;
+}
+
+@media only screen and (min-width: 769px) {
+
+    .activate-account-container {
+        width: 40vw;
+    }
+
+    .account-active-success > h2 {
+        font-size: 2.5rem;
+    }
+
+    .account-active-success p {
+        font-size: 1rem;
+    }
+}

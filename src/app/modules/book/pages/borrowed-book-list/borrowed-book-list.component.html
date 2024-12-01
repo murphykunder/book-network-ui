@@ -1,0 +1,40 @@
+<div class="m-5">
+    <h2>My Books</h2>
+    <hr>
+    <table class="table borrowed-book-list-container">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">ISBN</th>
+                <th scope="col">Rate</th>
+                <th scope="col">
+                    <i class="fa-solid fa-gears"></i>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let book of borrowedBookResponse.content; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{book.title}}</td>
+                <td>{{book.authorName}}</td>
+                <td>{{book.isbn}}</td>
+                <td>
+                    <i class="fa-solid fa-star text-warning" title="rating"></i>&nbsp;{{book.rate}}
+                </td>
+                <td>
+                    <button>
+                        <i class="fa-solid fa-paper-plane text-success"></i>
+                    </button>
+                    &nbsp;&nbsp;
+                    <i class="fa-solid fa-circle-check" *ngIf="book.returned"
+                        [class.text-success]="book.returned && book.returnedApproved"
+                        [class.text-danger]="book.returned && !book.returnedApproved"
+                    ></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

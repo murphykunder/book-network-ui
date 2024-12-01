@@ -1,0 +1,35 @@
+.pagination-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    list-style-type: none;
+    text-align: center;
+}
+
+.pagination-item {
+    margin: 0 3px;
+    width: 30px;
+    height: 30px;
+    border-radius : 5px;
+}
+
+.pagination-item:hover{
+    background-color: #efeff0;
+}
+
+.pagination-item.active {
+    background-color: #f7f0fb;
+}
+
+
+.pagination-item.active > a {
+    color: #7d559c;
+}
+
+.pagination-container a {
+    text-decoration: none;
+    color: #333;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+}

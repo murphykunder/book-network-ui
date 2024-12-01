@@ -1,0 +1,41 @@
+<div class="book-list-container m-5">
+    <h2>My Books</h2>
+    <hr>
+    <!-- flash error message -->
+    <div *ngIf="errorMessage" class="alert error-alert alert-dismissible" role="alert">
+        <div class="error-alert-icon">
+            <i class="fa-solid fa-2x fa-circle-exclamation"></i>
+        </div>
+        <div class="error-alert-message">
+            <strong>Error</strong><br>{{ errorMessage }}
+        </div>
+        <div class="error-alert-close">
+            <button type="button" class="button-close" data-bs-dismiss="alert" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+             </button>
+        </div>
+    </div>
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-primary btn-sm" routerLink="/books/manage">
+            <i class="fa-solid fa-plus fa-sm"></i>&nbsp;New Book
+        </button>
+    </div>
+    <!-- display book list -->
+    <div class="book-card-group">
+        <app-book *ngFor="let book of bookResponse.content"
+            [book]="book"
+            [manage]="true"
+            (archive)="onArchive($event)"
+            (edit)="onEdit($event)"
+            (share)="onShare($event)"
+        ></app-book>
+    </div>
+    <!-- display pagination -->
+     <app-pagination
+        [page]="defaultPage"
+        [totalPages]="bookResponse.totalPages || 0"
+        [isFirst]="bookResponse.first || false"
+        [isLast]="bookResponse.last || false"
+        (handleClick)="findAllBooks($event)"
+    ></app-pagination>
+</div>

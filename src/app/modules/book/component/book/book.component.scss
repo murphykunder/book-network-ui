@@ -1,0 +1,76 @@
+.book-card {
+    width: 18rem;
+    margin: 20px 20px 5px 20px;
+    max-height: 450px;
+    min-height: 450px;
+}
+
+.book-card > img {
+    height: 200px;
+}
+
+.book-card .card-body {
+    overflow: hidden;
+    padding: 0;
+    margin: 10px 10px;
+}
+
+.book-card  .card-title {
+    font-size: 1.2rem;
+}
+
+.book-card .card-subtitle {
+    font-size: 0.7rem;
+}
+
+.book-card .card-text {
+    font-size: 0.8rem;
+}
+
+.book-card > .card-footer {
+    background: none;
+    border-top: none;
+}
+
+.card-footer i {
+    cursor: pointer;
+}
+
+.book-action-message{
+    font-size: 0.8rem;
+    text-align: center;
+    opacity: 1;
+    animation-name: action-message-fade-out;
+    animation-duration: 1s;
+    animation-delay:1.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes action-message-fade-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@media only screen and (min-width: 769px) {
+
+    .book-card  .card-title {
+        font-size: 1rem;
+    }
+
+    .book-card .card-subtitle {
+        font-size: 0.7rem;
+    }
+
+    .book-card .card-text {
+        font-size: 0.8rem;
+    }
+
+    .book-card i {
+        font-size: 0.8rem;
+    }
+
+}

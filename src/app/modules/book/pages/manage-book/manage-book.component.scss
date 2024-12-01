@@ -1,0 +1,15 @@
+.manage-form label,
+.manage-form input,
+.manage-form textarea,
+.manage-form button {
+    font-size: 0.9rem;
+}
+
+.manage-form .text-danger {
+    font-size: 0.8rem;
+}
+
+.manage-form .text-danger::before {
+    content: "*";
+    font-size: 0.8rem;
+}

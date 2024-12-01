@@ -1,0 +1,14 @@
+services:
+  bsn-ui:
+    container_name: bsn-ui
+    image: alishakunder/bsn-ui:1.0.0
+    ports:
+      - 8081:80
+    networks:
+      - spring-demo
+    depends_on:
+      - bsn-api
+
+networks:
+  spring-demo:
+    driver: bridge

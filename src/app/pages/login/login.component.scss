@@ -1,0 +1,52 @@
+.login-container {
+    width: 60vw !important;
+    margin-top: 15%;
+}
+
+.login-container > h3 {
+    font-size: 1.2rem;
+}
+
+form, .form-label, .form-control {
+    font-size: 0.8rem;
+}
+
+.login-button-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.login-button-container em {
+    letter-spacing: 0.1rem;
+}
+
+.login-button-container button,
+.login-button-container div {
+    font-size: 0.8rem;
+}
+
+
+// for laptops and small desktops
+@media only screen and (min-width: 769px) {
+
+    .login-container {
+        width: 30vw !important;
+        margin-top: 20vh;
+    }
+
+    .login-button-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    form, .form-label, .form-control {
+        font-size: 0.9rem;
+    }
+
+    .login-button-container button,
+    .login-button-container div {
+        font-size: 0.9rem;
+    }
+
+}

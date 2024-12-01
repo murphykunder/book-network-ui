@@ -1,0 +1,88 @@
+# Give a name to the pipeline
+name: BSN frontend UI pipeline
+# Mention when u want to trigger the pipeline. Here we say on action push.
+on:
+  push:
+  # You can mention on which specific branch push you want to trigger the pipeline. If you remove branches, the pipeline will be triggered on any push to the code
+    branches:
+      - ci/pipeline
+    # Trigger the pipeline when we perform changes on specific files in the code
+    paths:
+      - /**  # any change made to the backend api project
+      - 'Dockerfile'   # any change made to the backend Dockerfile
+      - 'docker-compose.yml'   # any change in the docker-compose file
+      - .github/workflows/*-frontend.yml    # any change made to this file
+
+jobs:
+  build-image:
+    name: Build Frontend docker image
+    runs-on: ubuntu
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          
+      - name: Extract project version
+        id: extract_version
+        run: |
+         echo "VERSION=$(jq -r '.version' package.json)" >> $GITHUB_OUTPUT
+         
+      - name: Login to Dockerhub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}    # use secrets to access github secrets defined in the repository
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          
+      - name: Build and push to Dockerhub
+        uses: docker/build-push-action@v6
+        with:
+          context: .   # folder from where to run the docker command. If you dont use mono repo approach and if you dockerfile is within the project then use dot (.)
+          file: Dockerfile
+          push: true    # if push = true, then it will push the image to docker hub
+          platforms: linux/amd64    # if amd64 is not compatible with your server, you will see an error. YOu would then need to change the platform
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/bsn-ui:${{ steps.extract_version.outputs.VERSION}}, ${{ secrets.DOCKERHUB_USERNAME }}/bsn-ui:latest  # define here 2 tags alishakunder/bsn-ui:1.0.4 & alishakunder/bsn-ui:latest
+          
+  deploy:
+    name: Deploy frontend
+    runs-on: ubuntu
+    needs: [build-image]
+    steps:
+      - name: Create deployment folder
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_KEY }}
+          port: 22
+          script: |
+            mkdir -p ci-cd
+            
+      - name: Copy the docker compose file
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_KEY }}
+          port: 22
+          source: "docker-compose.yml"
+          target: "/home/***/ci-cd"
+          overwrite: true
+          
+      - name: Login to Dockerhub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          
+      - name: Set env variables required by the application backend in this linux env and deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_KEY }}
+          port: 22
+          script: |
+            cd ci-cd
+            docker compose -f docker-compose.yml pull -q
+            docker compose -f docker-compose.yml up -d
